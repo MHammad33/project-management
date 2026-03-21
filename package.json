@@ -1,0 +1,20 @@
+{
+  "name": "project-management",
+  "version": "1.0.0",
+  "description": "A project management application",
+  "keywords": [
+    "backend",
+    "api",
+    "node"
+  ],
+  "license": "ISC",
+  "author": "Muhammad Hammad Afzal",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "devDependencies": {
+    "prettier": "3.8.1"
+  }
+}
