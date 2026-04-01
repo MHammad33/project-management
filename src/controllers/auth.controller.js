@@ -88,7 +88,7 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "User not found with the provided email");
   }
 
-  const isPasswordValid = await user.comparePassword(password);
+  const isPasswordValid = await user.isPasswordCorrect(password);
 
   if (!isPasswordValid) {
     throw new ApiError(400, "Invalid credentials");
