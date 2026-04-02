@@ -1,6 +1,6 @@
-import express from "express";
-import cors from "cors";
 import cookieParser from "cookie-parser";
+import cors from "cors";
+import express from "express";
 
 const app = express();
 
@@ -21,8 +21,8 @@ app.use(
 );
 
 // Import Routes
-import healthCheckRouter from "./routes/healthcheck.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import healthCheckRouter from "./routes/healthcheck.routes.js";
 
 app.use("/api/v1/healthcheck", healthCheckRouter);
 app.use("/api/v1/auth", authRouter);
