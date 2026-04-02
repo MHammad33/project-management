@@ -37,4 +37,4 @@ const userLoginValidator = () => {
   ];
 };
 
-export { userRegistrationValidator, userLoginValidator };
+export { userLoginValidator, userRegistrationValidator };
