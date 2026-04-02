@@ -2,8 +2,7 @@ import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/api-error.js";
 import { ApiResponse } from "../utils/api-response.js";
 import { asyncHandler } from "../utils/async-handler.js";
-import { sendEmail } from "../utils/mail.js";
-import { emailVerificationMailGenContent } from "../utils/mail.js";
+import { emailVerificationMailGenContent, sendEmail } from "../utils/mail.js";
 
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
@@ -120,4 +119,4 @@ const loginUser = asyncHandler(async (req, res) => {
     );
 });
 
-export { registerUser, loginUser };
+export { loginUser, registerUser };
