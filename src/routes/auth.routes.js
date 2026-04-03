@@ -4,6 +4,7 @@ import {
   logoutUser,
   registerUser,
 } from "../controllers/auth.controller.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { validate } from "../middlewares/validator.middleware.js";
 import {
   userLoginValidator,
@@ -18,6 +19,6 @@ router
 
 router.route("/login").post(userLoginValidator(), validate, loginUser);
 
-router.route("/logout").post(logoutUser);
+router.route("/logout").post(verifyJWT, logoutUser);
 
 export default router;
