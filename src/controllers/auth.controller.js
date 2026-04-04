@@ -215,10 +215,13 @@ const resendEmailVerification = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Verification email resent successfully"));
 });
 
+const refreshAccessToken = asyncHandler(async (req, res) => {});
+
 export {
   getCurrentUser,
   loginUser,
   logoutUser,
+  refreshAccessToken,
   registerUser,
   resendEmailVerification,
   verifyEmail,
