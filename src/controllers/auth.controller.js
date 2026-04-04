@@ -1,9 +1,9 @@
+import crypto from "crypto";
 import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/api-error.js";
 import { ApiResponse } from "../utils/api-response.js";
 import { asyncHandler } from "../utils/async-handler.js";
 import { emailVerificationMailGenContent, sendEmail } from "../utils/mail.js";
-import crypto from "crypto";
 
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
@@ -183,4 +183,13 @@ const verifyEmail = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, {}, "Email verified successfully"));
 });
 
-export { getCurrentUser, loginUser, logoutUser, registerUser, verifyEmail };
+const resendEmailVerification = asyncHandler(async (req, res) => {});
+
+export {
+  getCurrentUser,
+  loginUser,
+  logoutUser,
+  registerUser,
+  resendEmailVerification,
+  verifyEmail,
+};
