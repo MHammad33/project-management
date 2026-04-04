@@ -14,9 +14,10 @@ import {
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { validate } from "../middlewares/validator.middleware.js";
 import {
+  userChangeCurrentPasswordValidator,
+  userForgotPasswordValidator,
   userLoginValidator,
   userRegistrationValidator,
-  userForgotPasswordValidator,
   userResetPasswordValidator,
 } from "../validators/index.js";
 
@@ -39,7 +40,9 @@ router
 // Secured routes (require JWT authentication)
 router.route("/logout").post(verifyJWT, logoutUser);
 router.route("/me").get(verifyJWT, getCurrentUser);
-router.route("/change-password").post(verifyJWT, changeCurrentPassword);
+router
+  .route("/change-password")
+  .post(userChangeCurrentPasswordValidator(), validate, changeCurrentPassword);
 router
   .route("/resend-verification-email")
   .post(verifyJWT, resendEmailVerification);
