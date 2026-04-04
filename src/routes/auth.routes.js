@@ -21,4 +21,6 @@ router.route("/login").post(userLoginValidator(), validate, loginUser);
 
 router.route("/logout").post(verifyJWT, logoutUser);
 
+router.route("/me").get(verifyJWT, getCurrentUser);
+
 export default router;
