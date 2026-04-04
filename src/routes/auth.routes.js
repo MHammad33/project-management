@@ -20,22 +20,22 @@ import {
 
 const router = Router();
 
+// Unsecured routes
 router
   .route("/register")
   .post(userRegistrationValidator(), validate, registerUser);
-
 router.route("/login").post(userLoginValidator(), validate, loginUser);
-
-router.route("/logout").post(verifyJWT, logoutUser);
-
-router.route("/me").get(verifyJWT, getCurrentUser);
 router.route("/verify-email/:token").get(verifyEmail);
-router
-  .route("/resend-verification-email")
-  .post(verifyJWT, resendEmailVerification);
 router.route("/refresh-token").post(refreshAccessToken);
 router.route("/forgot-password").post(forgotPassword);
 router.route("/reset-password/:token").post(resetPassword);
+
+// Secured routes (require JWT authentication)
+router.route("/logout").post(verifyJWT, logoutUser);
+router.route("/me").get(verifyJWT, getCurrentUser);
 router.route("/change-password").post(verifyJWT, changeCurrentPassword);
+router
+  .route("/resend-verification-email")
+  .post(verifyJWT, resendEmailVerification);
 
 export default router;
