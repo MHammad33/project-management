@@ -16,6 +16,7 @@ import { validate } from "../middlewares/validator.middleware.js";
 import {
   userLoginValidator,
   userRegistrationValidator,
+  userForgotPasswordValidator,
 } from "../validators/index.js";
 
 const router = Router();
@@ -27,7 +28,9 @@ router
 router.route("/login").post(userLoginValidator(), validate, loginUser);
 router.route("/verify-email/:token").get(verifyEmail);
 router.route("/refresh-token").post(refreshAccessToken);
-router.route("/forgot-password").post(forgotPassword);
+router
+  .route("/forgot-password")
+  .post(userForgotPasswordValidator(), validate, forgotPassword);
 router.route("/reset-password/:token").post(resetPassword);
 
 // Secured routes (require JWT authentication)
