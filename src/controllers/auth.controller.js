@@ -305,7 +305,36 @@ const forgotPassword = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Password reset email sent successfully"));
 });
 
-const resetPassword = asyncHandler(async (req, res) => {});
+const resetPassword = asyncHandler(async (req, res) => {
+  const { token } = req.params;
+  const { newPassword } = req.body;
+
+  if (!token) {
+    throw new ApiError(400, "Reset token is required");
+  }
+
+  if (!newPassword) {
+    throw new ApiError(400, "New password is required");
+  }
+
+  let hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
+  const user = await User.findOne({
+    forgotPasswordToken: hashedToken,
+    forgotPasswordExpiry: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    throw new ApiError(409, "Invalid or expired reset token");
+  }
+
+  user.password = newPassword;
+  user.forgotPasswordToken = null;
+  user.forgotPasswordExpiry = null;
+  await user.save();
+
+  res.status(200).json(new ApiResponse(200, {}, "Password reset successfully"));
+});
 
 export {
   forgotPassword,
