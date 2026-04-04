@@ -37,4 +37,19 @@ const userLoginValidator = () => {
   ];
 };
 
+const userChangeCurrentPasswordValidator = () => {
+  return [
+    body("currentPassword")
+      .trim()
+      .notEmpty()
+      .withMessage("Current password is required"),
+    body("newPassword")
+      .trim()
+      .notEmpty()
+      .withMessage("New password is required")
+      .isLength({ min: 6 })
+      .withMessage("New password must be at least 6 characters long"),
+  ];
+};
+
 export { userLoginValidator, userRegistrationValidator };
