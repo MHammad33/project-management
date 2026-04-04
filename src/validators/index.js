@@ -67,4 +67,10 @@ const userResetPasswordValidator = () => {
   ];
 };
 
-export { userLoginValidator, userRegistrationValidator };
+export {
+  userChangeCurrentPasswordValidator,
+  userForgotPasswordValidator,
+  userLoginValidator,
+  userRegistrationValidator,
+  userResetPasswordValidator,
+};
