@@ -29,5 +29,6 @@ router.route("/verify-email/:token").get(verifyEmail);
 router
   .route("/resend-verification-email")
   .post(verifyJWT, resendEmailVerification);
+router.route("/refresh-token").post(refreshAccessToken);
 
 export default router;
