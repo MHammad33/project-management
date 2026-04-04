@@ -305,6 +305,8 @@ const forgotPassword = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Password reset email sent successfully"));
 });
 
+const resetPassword = asyncHandler(async (req, res) => {});
+
 export {
   forgotPassword,
   getCurrentUser,
@@ -313,5 +315,6 @@ export {
   refreshAccessToken,
   registerUser,
   resendEmailVerification,
+  resetPassword,
   verifyEmail,
 };
