@@ -175,7 +175,7 @@ const verifyEmail = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid or expired verification token");
   }
 
-  user.isEmailVerfied = true;
+  user.isEmailVerified = true;
   user.emailVerificationToken = null;
   user.emailVerificationExpiry = null;
   await user.save({ validateBeforeSave: false });
