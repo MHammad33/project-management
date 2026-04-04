@@ -156,4 +156,6 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     );
 });
 
-export { getCurrentUser, loginUser, logoutUser, registerUser };
+const verifyEmail = asyncHandler(async (req, res) => {});
+
+export { getCurrentUser, loginUser, logoutUser, registerUser, verifyEmail };
