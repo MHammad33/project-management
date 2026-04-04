@@ -17,6 +17,7 @@ import {
   userLoginValidator,
   userRegistrationValidator,
   userForgotPasswordValidator,
+  userResetPasswordValidator,
 } from "../validators/index.js";
 
 const router = Router();
@@ -31,7 +32,9 @@ router.route("/refresh-token").post(refreshAccessToken);
 router
   .route("/forgot-password")
   .post(userForgotPasswordValidator(), validate, forgotPassword);
-router.route("/reset-password/:token").post(resetPassword);
+router
+  .route("/reset-password/:token")
+  .post(userResetPasswordValidator(), validate, resetPassword);
 
 // Secured routes (require JWT authentication)
 router.route("/logout").post(verifyJWT, logoutUser);
