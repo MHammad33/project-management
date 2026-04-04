@@ -4,6 +4,7 @@ import {
   loginUser,
   logoutUser,
   registerUser,
+  resendEmailVerification,
   verifyEmail,
 } from "../controllers/auth.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
@@ -27,6 +28,6 @@ router.route("/me").get(verifyJWT, getCurrentUser);
 router.route("/verify-email/:token").get(verifyEmail);
 router
   .route("/resend-verification-email")
-  .post(verifyJWT, resendVerificationEmail);
+  .post(verifyJWT, resendEmailVerification);
 
 export default router;
