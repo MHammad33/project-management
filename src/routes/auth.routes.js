@@ -25,5 +25,8 @@ router.route("/logout").post(verifyJWT, logoutUser);
 
 router.route("/me").get(verifyJWT, getCurrentUser);
 router.route("/verify-email/:token").get(verifyEmail);
+router
+  .route("/resend-verification-email")
+  .post(verifyJWT, resendVerificationEmail);
 
 export default router;
