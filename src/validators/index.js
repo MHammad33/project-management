@@ -52,4 +52,19 @@ const userChangeCurrentPasswordValidator = () => {
   ];
 };
 
+const userForgotPasswordValidator = () => {
+  return [body("email").trim().isEmail().withMessage("Email is not valid")];
+};
+
+const userResetPasswordValidator = () => {
+  return [
+    body("newPassword")
+      .trim()
+      .notEmpty()
+      .withMessage("New password is required")
+      .isLength({ min: 6 })
+      .withMessage("New password must be at least 6 characters long"),
+  ];
+};
+
 export { userLoginValidator, userRegistrationValidator };
