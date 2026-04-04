@@ -4,6 +4,7 @@ import {
   loginUser,
   logoutUser,
   registerUser,
+  verifyEmail,
 } from "../controllers/auth.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { validate } from "../middlewares/validator.middleware.js";
