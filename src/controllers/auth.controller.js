@@ -267,7 +267,10 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   }
 });
 
+const forgotPassword = asyncHandler(async (req, res) => {});
+
 export {
+  forgotPassword,
   getCurrentUser,
   loginUser,
   logoutUser,
