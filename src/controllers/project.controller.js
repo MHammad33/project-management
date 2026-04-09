@@ -1,4 +1,9 @@
+import mongoose from "mongoose";
+import { ProjectMember } from "../models/project-member.model.js";
+import { Project } from "../models/project.model.js";
+import { ApiResponse } from "../utils/api-response.js";
 import { asyncHandler } from "../utils/async-handler.js";
+import { UserRolesEnum } from "../utils/constants.js";
 
 const getProjects = asyncHandler(async (req, res) => {
   // TODO: Implement logic to get all projects
@@ -9,7 +14,23 @@ const getProjectById = asyncHandler(async (req, res) => {
 });
 
 const createProject = asyncHandler(async (req, res) => {
-  // TODO: Implement logic to create a new project
+  const { name, description } = req.body;
+
+  const project = await Project.create({
+    name,
+    description,
+    createdBy: new mongoose.Types.ObjectId(req.user._id),
+  });
+
+  await ProjectMember.create({
+    user: new mongoose.Types.ObjectId(req.user._id),
+    project: new mongoose.Types.ObjectId(project._id),
+    role: UserRolesEnum.ADMIN,
+  });
+
+  return res
+    .status(201)
+    .json(new ApiResponse(201, project, "Project created successfully"));
 });
 
 const updateProject = asyncHandler(async (req, res) => {
@@ -37,13 +58,13 @@ const removeMemberFromProject = asyncHandler(async (req, res) => {
 });
 
 export {
-  getProjects,
-  getProjectById,
-  createProject,
-  updateProject,
-  deleteProject,
   addMemberToProject,
+  createProject,
+  deleteProject,
+  getProjectById,
   getProjectMembers,
-  updateProjectMemberRole,
+  getProjects,
   removeMemberFromProject,
+  updateProject,
+  updateProjectMemberRole,
 };
