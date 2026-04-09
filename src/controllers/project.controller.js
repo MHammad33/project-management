@@ -54,7 +54,21 @@ const updateProject = asyncHandler(async (req, res) => {
 });
 
 const deleteProject = asyncHandler(async (req, res) => {
-  // TODO: Implement logic to delete a project
+  const { projectId } = req.params;
+
+  const project = await Project.findByIdAndDelete(projectId);
+
+  if (!project) {
+    throw new ApiError(404, "Project not found");
+  }
+
+  await ProjectMember.deleteMany({
+    project: new mongoose.Types.ObjectId(projectId),
+  });
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, null, "Project deleted successfully"));
 });
 
 const addMemberToProject = asyncHandler(async (req, res) => {
