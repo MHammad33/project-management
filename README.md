@@ -16,7 +16,7 @@ A Node.js backend API for project management applications, built with Express.js
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB with Mongoose
 - **Authentication**: JWT, bcrypt
-- **Email**: Nodemailer, Mailgen
+- **Email**: nodemailer, Mailgen
 - **Validation**: Express-validator
 - **Containerization**: Docker, Docker Compose
 
