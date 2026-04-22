@@ -130,7 +130,30 @@ const deleteProject = asyncHandler(async (req, res) => {
 });
 
 const addMemberToProject = asyncHandler(async (req, res) => {
-  // TODO: Implement logic to add a member to a project
+  const { email, role } = req.body;
+  const { projectId } = req.params;
+
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+
+  await ProjectMember.findByIdAndUpdate(
+    {
+      project: new mongoose.Types.ObjectId(projectId),
+      user: new mongoose.Types.ObjectId(user._id),
+    },
+    {
+      project: new mongoose.Types.ObjectId(projectId),
+      user: new mongoose.Types.ObjectId(user._id),
+      role,
+    },
+    { new: true, upsert: true },
+  );
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Member added to project successfully"));
 });
 
 const getProjectMembers = asyncHandler(async (req, res) => {
